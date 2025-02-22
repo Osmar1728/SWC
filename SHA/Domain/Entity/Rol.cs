@@ -8,7 +8,7 @@ namespace SHA.Domain.Entity
 
         public string Id { get; set; }
         public string Roles {  get; set; }
-        public string Estado { get; set; }
+        public bool Estado { get; set; }
 
         //Relacion 
 

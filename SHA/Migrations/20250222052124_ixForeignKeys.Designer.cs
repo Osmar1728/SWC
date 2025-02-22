@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SHA.Repo;
 
@@ -10,9 +11,11 @@ using SHA.Repo;
 namespace SHA.Migrations
 {
     [DbContext(typeof(AplicationDBContext))]
-    partial class AplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20250222052124_ixForeignKeys")]
+    partial class ixForeignKeys
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -219,34 +222,6 @@ namespace SHA.Migrations
                     b.HasIndex("IdUsuario");
 
                     b.ToTable("EquiposDaniados");
-                });
-
-            modelBuilder.Entity("SHA.Domain.Entity.Impresora", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Cabina")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Modelo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Numero")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Precio")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("Ubicacion")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Impresoras");
                 });
 
             modelBuilder.Entity("SHA.Domain.Entity.Laptop", b =>
@@ -486,38 +461,6 @@ namespace SHA.Migrations
                     b.ToTable("Moviles");
                 });
 
-            modelBuilder.Entity("SHA.Domain.Entity.Printek", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("IdDepartamento")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Ip")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Modelo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Tipo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Ubicacion")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IdDepartamento");
-
-                    b.ToTable("Printeks");
-                });
-
             modelBuilder.Entity("SHA.Domain.Entity.Rol", b =>
                 {
                     b.Property<string>("Id")
@@ -533,28 +476,6 @@ namespace SHA.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Roles");
-                });
-
-            modelBuilder.Entity("SHA.Domain.Entity.Servidor", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Comentario")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Ip")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Servidores");
                 });
 
             modelBuilder.Entity("SHA.Domain.Entity.Tablet", b =>
@@ -848,17 +769,6 @@ namespace SHA.Migrations
                     b.Navigation("Empresa");
 
                     b.Navigation("Usuario");
-                });
-
-            modelBuilder.Entity("SHA.Domain.Entity.Printek", b =>
-                {
-                    b.HasOne("SHA.Domain.Entity.Departamento", "Departamento")
-                        .WithMany()
-                        .HasForeignKey("IdDepartamento")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Departamento");
                 });
 
             modelBuilder.Entity("SHA.Domain.Entity.Tablet", b =>
